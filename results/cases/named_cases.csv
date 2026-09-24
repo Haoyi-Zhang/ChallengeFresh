@@ -1,0 +1,15 @@
+case,branch,full,flag,coherent,coset,oracle,sound,exact,improves_full,improves_simple_min,oracle_states
+noisy-adaptive,1,1,1,1,1,1,1,1,0,0,7
+biased-capped-source,5/8,5/8,5/8,5/8,5/8,5/8,1,1,0,0,17
+coordinate-geometry,1,1,1,1,1,1,1,1,0,0,2
+deterministic-branching,1,1,1,1,3/4,3/4,1,1,1,1,7
+flag-information-grant,1,1,7/8,7/8,7/8,3/4,1,0,1,0,43
+helper-reveals-response,1,1,1,1,1,1,1,1,0,0,6
+independent-blocks,15/64,15/64,15/64,15/64,15/64,15/64,1,1,0,0,73
+noisy-running-example,5/8,5/8,17/32,17/32,17/32,17/32,1,1,1,0,43
+overlapping-blocks,5/8,5/8,5/8,5/8,5/8,1/2,1,0,0,0,21
+cross-flag-coupling,1,51/64,53/64,51/64,51/64,11/16,1,0,0,0,170
+rejection-posterior,1,1,1,1,1,1/2,1,0,0,0,15
+repeated-map,1,1,1,1,1,1/2,1,0,0,0,15
+repetition-geometry,1,1,1,1,1,1/2,1,0,0,0,3
+three-tolerant-guesses,13/16,13/16,13/16,13/16,13/16,13/16,1,1,0,0,697

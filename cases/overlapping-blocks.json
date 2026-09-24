@@ -1,0 +1,26 @@
+{
+  "dimension": 3,
+  "min_entropy": 3,
+  "name": "overlapping-blocks",
+  "root": {
+    "guesses": 1,
+    "next": {
+      "guesses": 1,
+      "next": {
+        "type": "stop"
+      },
+      "radius": 0,
+      "rows": [
+        2,
+        4
+      ],
+      "type": "epoch"
+    },
+    "radius": 0,
+    "rows": [
+      1,
+      2
+    ],
+    "type": "epoch"
+  }
+}

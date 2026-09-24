@@ -1,0 +1,36 @@
+{
+  "dimension": 1,
+  "min_entropy": 1,
+  "name": "helper-reveals-response",
+  "root": {
+    "children": [
+      {
+        "guesses": 1,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1
+        ],
+        "type": "epoch"
+      },
+      {
+        "guesses": 1,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1
+        ],
+        "type": "epoch"
+      }
+    ],
+    "eta": "0",
+    "rows": [
+      1
+    ],
+    "type": "observe"
+  }
+}

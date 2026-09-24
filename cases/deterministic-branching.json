@@ -1,0 +1,36 @@
+{
+  "dimension": 2,
+  "min_entropy": 2,
+  "name": "deterministic-branching",
+  "root": {
+    "children": [
+      {
+        "guesses": 1,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1
+        ],
+        "type": "epoch"
+      },
+      {
+        "guesses": 1,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          2
+        ],
+        "type": "epoch"
+      }
+    ],
+    "eta": "0",
+    "rows": [
+      1
+    ],
+    "type": "observe"
+  }
+}

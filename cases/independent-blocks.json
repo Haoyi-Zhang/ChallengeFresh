@@ -1,0 +1,28 @@
+{
+  "dimension": 6,
+  "min_entropy": 6,
+  "name": "independent-blocks",
+  "root": {
+    "guesses": 1,
+    "next": {
+      "guesses": 1,
+      "next": {
+        "type": "stop"
+      },
+      "radius": 0,
+      "rows": [
+        8,
+        16,
+        32
+      ],
+      "type": "epoch"
+    },
+    "radius": 0,
+    "rows": [
+      1,
+      2,
+      4
+    ],
+    "type": "epoch"
+  }
+}

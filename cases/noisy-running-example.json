@@ -1,0 +1,56 @@
+{
+  "dimension": 4,
+  "min_entropy": 4,
+  "name": "noisy-running-example",
+  "root": {
+    "children": [
+      {
+        "guesses": 1,
+        "next": {
+          "guesses": 1,
+          "next": {
+            "type": "stop"
+          },
+          "radius": 0,
+          "rows": [
+            4,
+            8
+          ],
+          "type": "epoch"
+        },
+        "radius": 0,
+        "rows": [
+          1,
+          2
+        ],
+        "type": "epoch"
+      },
+      {
+        "guesses": 1,
+        "next": {
+          "guesses": 1,
+          "next": {
+            "type": "stop"
+          },
+          "radius": 0,
+          "rows": [
+            2,
+            8
+          ],
+          "type": "epoch"
+        },
+        "radius": 0,
+        "rows": [
+          1,
+          4
+        ],
+        "type": "epoch"
+      }
+    ],
+    "eta": "1/4",
+    "rows": [
+      1
+    ],
+    "type": "observe"
+  }
+}

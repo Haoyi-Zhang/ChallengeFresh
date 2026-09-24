@@ -1,0 +1,19 @@
+{
+  "dimension": 4,
+  "min_entropy": 4,
+  "name": "three-tolerant-guesses",
+  "root": {
+    "guesses": 3,
+    "next": {
+      "type": "stop"
+    },
+    "radius": 1,
+    "rows": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "type": "epoch"
+  }
+}

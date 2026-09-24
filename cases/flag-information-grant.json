@@ -1,0 +1,63 @@
+{
+  "dimension": 2,
+  "min_entropy": 2,
+  "name": "flag-information-grant",
+  "root": {
+    "children": [
+      {
+        "guesses": 2,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1,
+          2
+        ],
+        "type": "epoch"
+      },
+      {
+        "guesses": 2,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1,
+          2
+        ],
+        "type": "epoch"
+      },
+      {
+        "guesses": 2,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1,
+          2
+        ],
+        "type": "epoch"
+      },
+      {
+        "guesses": 2,
+        "next": {
+          "type": "stop"
+        },
+        "radius": 0,
+        "rows": [
+          1,
+          2
+        ],
+        "type": "epoch"
+      }
+    ],
+    "eta": "1/4",
+    "rows": [
+      1,
+      2
+    ],
+    "type": "observe"
+  }
+}

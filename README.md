@@ -1,0 +1,77 @@
+# Composable challenge freshness
+
+This standalone repository accompanies **Noise-Aware Challenge-Freshness Certificates for Affine Identity Channels**. It evaluates conditional mathematical false-accept bounds for an explicitly declared finite affine identity model. It is not a device-authentication implementation, a hardware test, or evidence that a physical PUF satisfies the premises.
+
+## Scientific contents
+
+- `proofs/theorems.md` contains the complete written mathematical arguments. They are conventional proofs, not proof-assistant output.
+- `src/` contains GF(2) linear algebra, exact multi-ball coverage, five certificate evaluators, a distinct full-posterior finite oracle, deterministic campaign generators, and an aggregate-results validator.
+- `cases/` contains 15 exact JSON models. Fourteen appear in the retained named-case table; the additional model supports a guarded adaptive-path test.
+- `results/` retains all claim-linked CSV rows, exact sensitivity data, aggregate counts, and overwritten clean-reproduction receipts.
+- `literature/` records the 12 TDSC + 5 influential + 5 adjacent full-text calibration and the precise closest-work boundary.
+- `claim_evidence_ledger.csv` and `external_resources.csv` link claims and outside materials to the files that support or constrain them.
+
+The central certificate maintains a proof-only affine shadow. Residual rank selects the exact worst-code fraction of an affine response space covered by a bounded union of Hamming balls. Conditional epoch hazards compose over rejection histories without assuming independent attempts. One average conditional min-entropy deficit transfers the terminal event from a uniform reference law. For declared independent BSC observations, coherent signal coupling and affine-coset averaging retain part of the channel uncertainty while remaining sound.
+
+In the exact local-coverage domain the coset risk is no greater than the coherent-signal, separate-flag, probability-preserving full-channel, and branch-oblivious full-revelation risks. Outside that domain the executable issues the minimum of independently sound complete bounds; it does not assert an unproved cross-regime domination.
+
+## Run one declared model
+
+Requirements are Python with `int.bit_count`, the standard library, and a Unix-like system for the bounded campaign runner. No package installation or network access is required. Run commands from this repository root:
+
+```sh
+python src/cli.py cases/noisy-observation.json --oracle
+python -m unittest discover -s tests -v
+```
+
+The first command returns issued bound `17/32`, full-channel baseline `5/8`, and finite-oracle probability `17/32`. All are exact fractions. Invalid or unsupported input produces an error and no certificate. The exact oracle has stricter dimensions and retry limits than the certificate; omit `--oracle` for larger declared models.
+
+## Reproduce all retained evidence
+
+```sh
+python reproduce.py
+python src/validate_results.py
+```
+
+The runner executes one child at a time, rejects optimized Python, imposes a 3.5 GiB address-space ceiling and 45-second CPU/command ceiling, and stops on any nonzero exit, timeout, or byte difference. Its bounded resumable groups are:
+
+```sh
+python reproduce.py --group quick
+python reproduce.py --group coverage
+python reproduce.py --group noisy0
+python reproduce.py --group noisy1
+python reproduce.py --group noisy2
+python reproduce.py --group noisy3
+python reproduce.py --group noisy4
+python reproduce.py --group sensitivity
+python reproduce.py --group validate
+```
+
+Each generation group byte-compares newly generated scientific CSV files with the retained references. Timing receipts are overwritten separately under `results/reproduction/`; the validator recomputes aggregate counts from raw rows rather than trusting `summary.json`.
+
+The fixed evidence includes:
+
+- 1,020 exact coverage entries, 105 direct coverage equalities, all 465 subspaces through ambient dimension five, 7,989 affine-code inequalities, 273 log-concavity checks, 5,460 balanced-rank transfers, and 18,265 signal-coset partitions;
+- 4,096 two-epoch models, of which 3,934 are certificate-exact and 162 conservative;
+- 87,040 noisy-observation models, of which 86,842 are certificate-exact and 198 conservative; 31,428 improve the probability-preserving full-channel risk and 14,976 improve the minimum of the full-channel and separate-flag risks;
+- 5,120 observation-after-rejection models, all exact in that fixed family;
+- zero finite-model cases in which a retained certificate was below the full-posterior oracle;
+- 18 unit tests, 14 retained named cases, and 17 exact noise-sensitivity points.
+
+These are exhaustive only under the inclusion rules implemented in `src/campaigns.py`. They are development-time finite checks, not a sample of deployments, a proof of the general theorems, or an independent replication.
+
+## Declared model and interpretation
+
+Read `model-language.md` before changing or adding a case. Public affine offsets are absorbed into candidates in the theorem; the JSON language stores zero-offset maps. Observation nodes use independent rational BSC errors. An epoch fixes a response map, Hamming radius and bounded adaptive guess count; it reveals only accept/reject and reaches its continuation only after all guesses fail. A source deficit is charged once to the final event.
+
+A certificate is an evaluated upper bound associated with explicit assumptions, not a signed attestation or succinct independently checkable proof object. No code path infers entropy, error independence, map correctness, verifier conformance, physical reliability, manufacturing uniqueness or unclonability.
+
+## Maturity, literature and external use
+
+The general results have complete written arguments and extensive finite checking but no proof-assistant mechanization or independent external review. The posterior oracle uses a different state representation, yet it was developed in the same research execution. Both exact and deliberately loose examples are retained.
+
+The full-text calibration now covers twelve TDSC papers, five foundational/influential papers and five adjacent papers. The closest 2025 PUF-AKE work constructs and analyzes computational AKE with reusable robust fuzzy extraction and reports attacks on prior PUF protocols; this repository instead gives conditional information-theoretic bounds for declared finite affine raw-response channels. Neither result is presented as subsuming the other, and no priority claim is made.
+
+Substantive AI assistance was used for research formulation, proof drafting, source analysis, code, finite checks, manuscript text and LaTeX figures. Human authors must verify the mathematics, evidence, citations, authorship and policy declarations before any external use. No submission, publication, public repository upload, contact, account action, acceptance claim or independent review is represented here.
+
+The repository is standalone and does not depend on a parent paper folder, private path, omitted cache or network service. Original software is licensed under `LICENSE`. Scholarly papers are cited rather than redistributed; `external_resources.csv` records acquisition and licensing boundaries.

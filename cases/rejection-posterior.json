@@ -1,0 +1,26 @@
+{
+  "dimension": 2,
+  "min_entropy": 2,
+  "name": "rejection-posterior",
+  "root": {
+    "guesses": 1,
+    "next": {
+      "guesses": 1,
+      "next": {
+        "type": "stop"
+      },
+      "radius": 0,
+      "rows": [
+        1,
+        2
+      ],
+      "type": "epoch"
+    },
+    "radius": 0,
+    "rows": [
+      1,
+      2
+    ],
+    "type": "epoch"
+  }
+}

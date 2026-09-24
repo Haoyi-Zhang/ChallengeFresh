@@ -1,0 +1,38 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.121029,
+      "child_user_seconds": 1.234203,
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "max_rss_kib": 94128,
+      "stderr": "test_13_running_example (test_core.CertificateOracleTests.test_13_running_example) ... ok\ntest_14_deterministic_fiber_average (test_core.CertificateOracleTests.test_14_deterministic_fiber_average) ... ok\ntest_15_flag_coupling (test_core.CertificateOracleTests.test_15_flag_coupling) ... ok\ntest_16_flag_information_loss (test_core.CertificateOracleTests.test_16_flag_information_loss) ... ok\ntest_17_noise_complement_relabeling (test_core.CertificateOracleTests.test_17_noise_complement_relabeling) ... ok\ntest_18_entropy_transfer_equality (test_core.CertificateOracleTests.test_18_entropy_transfer_equality) ... ok\ntest_06_one_ball_volume (test_core.CoverageTests.test_06_one_ball_volume) ... ok\ntest_07_two_ball_closed_behavior (test_core.CoverageTests.test_07_two_ball_closed_behavior) ... ok\ntest_08_three_ball_negative_control (test_core.CoverageTests.test_08_three_ball_negative_control) ... ok\ntest_09_profile_matches_direct (test_core.CoverageTests.test_09_profile_matches_direct) ... ok\ntest_01_canonical_basis_equivalence (test_core.LinearAlgebraTests.test_01_canonical_basis_equivalence) ... ok\ntest_02_nullspace_orthogonality (test_core.LinearAlgebraTests.test_02_nullspace_orthogonality) ... ok\ntest_03_coset_partition (test_core.LinearAlgebraTests.test_03_coset_partition) ... ok\ntest_04_all_subspace_counts (test_core.LinearAlgebraTests.test_04_all_subspace_counts) ... ok\ntest_05_high_bit_ordering (test_core.LinearAlgebraTests.test_05_high_bit_ordering) ... ok\ntest_10_unknown_key_rejected (test_core.ValidationTests.test_10_unknown_key_rejected) ... ok\ntest_11_bad_child_count_rejected (test_core.ValidationTests.test_11_bad_child_count_rejected) ... ok\ntest_12_prior_cap_rejected (test_core.ValidationTests.test_12_prior_cap_rejected) ... ok\n\n----------------------------------------------------------------------\nRan 18 tests in 0.115s\n\nOK\n",
+      "stdout": "",
+      "wall_seconds": 0.894368
+    },
+    {
+      "child_system_seconds": 0.090125,
+      "child_user_seconds": 1.197524,
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "src/campaigns.py",
+        "cases",
+        "--output",
+        "/tmp/freshness-quick-425hcjte/results"
+      ],
+      "max_rss_kib": 94888,
+      "stderr": "",
+      "stdout": "{\n  \"cpu_seconds\": 0.05999,\n  \"named_cases\": 14,\n  \"wall_seconds\": 0.062136\n}\n",
+      "wall_seconds": 0.827913
+    }
+  ],
+  "group": "quick",
+  "status": "pass"
+}

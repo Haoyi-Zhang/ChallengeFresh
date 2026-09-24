@@ -1,0 +1,23 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.077295,
+      "child_user_seconds": 13.324676,
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "src/campaigns.py",
+        "adaptive",
+        "--obs-row",
+        "1",
+        "--output",
+        "/tmp/freshness-noisy1-p5a2auyr/results"
+      ],
+      "max_rss_kib": 95020,
+      "stderr": "",
+      "stdout": "{\n  \"cpu_seconds\": 12.111222,\n  \"models\": 20480,\n  \"wall_seconds\": 12.115705\n}\n",
+      "wall_seconds": 12.940436
+    }
+  ],
+  "group": "noisy1",
+  "status": "pass"
+}

@@ -1,0 +1,37 @@
+{
+  "dimension": 4,
+  "min_entropy": 3,
+  "name": "biased-capped-source",
+  "prior": [
+    "1/8",
+    "1/8",
+    "1/8",
+    "1/8",
+    "1/8",
+    "1/8",
+    "1/8",
+    "0",
+    "1/8",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+  ],
+  "root": {
+    "guesses": 1,
+    "next": {
+      "type": "stop"
+    },
+    "radius": 1,
+    "rows": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "type": "epoch"
+  }
+}

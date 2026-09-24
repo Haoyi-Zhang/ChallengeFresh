@@ -1,0 +1,16 @@
+{
+  "dimension": 1,
+  "min_entropy": 1,
+  "name": "coordinate-geometry",
+  "root": {
+    "guesses": 1,
+    "next": {
+      "type": "stop"
+    },
+    "radius": 1,
+    "rows": [
+      1
+    ],
+    "type": "epoch"
+  }
+}
