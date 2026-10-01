@@ -1,0 +1,17 @@
+{
+  "case": "fair-public-bit-path-budget",
+  "conditional_path_issued": [
+    "1/4",
+    "1/2"
+  ],
+  "conditional_path_risks": [
+    "1/4",
+    "1/2"
+  ],
+  "exact_recursive_risk": "3/8",
+  "interpretation": "the fixed-stage product and Theorem 2 pathwise admission may use 1/2; the complete recurrence averages the fair public branches and returns 3/8",
+  "issued_risk": "3/8",
+  "pathwise_admission_alpha": "1/2",
+  "public_choice": "zero-row BSC(1/2), hence a fair public bit independent of X",
+  "uniform_fixed_stage_bound": "1/2"
+}

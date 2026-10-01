@@ -6,12 +6,12 @@ This standalone repository accompanies **Noise-Aware Challenge-Freshness Certifi
 
 - `proofs/theorems.md` contains the complete written mathematical arguments. They are conventional proofs, not proof-assistant output.
 - `src/` contains GF(2) linear algebra, exact multi-ball coverage, five certificate evaluators, a distinct full-posterior finite oracle, deterministic campaign generators, and an aggregate-results validator.
-- `cases/` contains 15 exact JSON models. Fourteen appear in the retained named-case table; the additional model supports a guarded adaptive-path test.
+- `cases/` contains 15 exact JSON files: fourteen distinct named models used by the retained case table and one equivalent CLI alias for the running example. The separate fair-public-bit path-budget witness is generated from `src/families.py` and retained under `results/cases/`.
 - `results/` retains all claim-linked CSV rows, exact sensitivity data, aggregate counts, and overwritten clean-reproduction receipts.
 - `literature/` records the 12 TDSC + 5 influential + 5 adjacent full-text calibration and the precise closest-work boundary.
 - `claim_evidence_ledger.csv` and `external_resources.csv` link claims and outside materials to the files that support or constrain them.
 
-The central certificate maintains a proof-only affine shadow. Residual rank selects the exact worst-code fraction of an affine response space covered by a bounded union of Hamming balls. Conditional epoch hazards compose over rejection histories without assuming independent attempts. One average conditional min-entropy deficit transfers the terminal event from a uniform reference law. For declared independent BSC observations, coherent signal coupling and affine-coset averaging retain part of the channel uncertainty while remaining sound.
+The central certificate maintains a proof-only affine shadow. Residual rank selects the exact worst-code fraction of an affine response space covered by a bounded union of Hamming balls. Fixed per-stage hazard bounds compose only when each one holds uniformly over every live history reaching that stage; history-dependent hazards use the pathwise admission theorem or the complete backward recurrence, without assuming independent attempts. One average conditional min-entropy deficit transfers the terminal event from a uniform reference law. For declared independent BSC observations, coherent signal coupling and affine-coset averaging retain part of the channel uncertainty while remaining sound.
 
 In the exact local-coverage domain the coset risk is no greater than the coherent-signal, separate-flag, probability-preserving full-channel, and branch-oblivious full-revelation risks. Outside that domain the executable issues the minimum of independently sound complete bounds; it does not assert an unproved cross-regime domination.
 
@@ -21,10 +21,10 @@ Requirements are Python with `int.bit_count`, the standard library, and a Unix-l
 
 ```sh
 python src/cli.py cases/noisy-observation.json --oracle
-python -m unittest discover -s tests -v
+PYTHONPATH=src python -m unittest discover -s tests -v
 ```
 
-The first command returns issued bound `17/32`, full-channel baseline `5/8`, and finite-oracle probability `17/32`. All are exact fractions. Invalid or unsupported input produces an error and no certificate. The exact oracle has stricter dimensions and retry limits than the certificate; omit `--oracle` for larger declared models.
+The first command reports the required source parameters `d`, `k`, and `delta=d-k`; all five complete method bounds and their exact/fallback status; issued bound `17/32`; full-channel baseline `5/8`; and finite-oracle probability `17/32`. All are exact fractions. `--method` selects a diagnostic view but never replaces the issued minimum over complete sound bounds; `--trace` emits deterministic per-node certificate state, while the JSON root separately records the externally supplied source, map, channel, verifier, and stopping premises. Invalid or unsupported input produces an error and no certificate. The exact oracle has stricter dimensions and retry limits than the certificate; omit `--oracle` for larger declared models.
 
 ## Reproduce all retained evidence
 
@@ -47,22 +47,22 @@ python reproduce.py --group sensitivity
 python reproduce.py --group validate
 ```
 
-Each generation group byte-compares newly generated scientific CSV files with the retained references. Timing receipts are overwritten separately under `results/reproduction/`; the validator recomputes aggregate counts from raw rows rather than trusting `summary.json`.
+Each generation group byte-compares newly generated scientific CSV/JSON evidence with the retained references. Timing receipts are overwritten separately under `results/reproduction/`; the validator recomputes equality, soundness, exactness, improvement, and exact-domain hierarchy indicators from raw numeric fields rather than trusting stored flags or `summary.json`. Tamper tests alter raw values while preserving success flags in isolated copies and require the validator to reject them.
 
 The fixed evidence includes:
 
 - 1,020 exact coverage entries, 105 direct coverage equalities, all 465 subspaces through ambient dimension five, 7,989 affine-code inequalities, 273 log-concavity checks, 5,460 balanced-rank transfers, and 18,265 signal-coset partitions;
-- 4,096 two-epoch models, of which 3,934 are certificate-exact and 162 conservative;
+- 4,096 two-epoch models with `d=2`, two ordered rows per stage via `two_row_map(i)=(i&3,(i>>2)&3)`, of which 3,934 are certificate-exact and 162 conservative; `results/protocols/two_epoch_domain.json` records the exact Cartesian domain;
 - 87,040 noisy-observation models, of which 86,842 are certificate-exact and 198 conservative; 31,428 improve the probability-preserving full-channel risk and 14,976 improve the minimum of the full-channel and separate-flag risks;
 - 5,120 observation-after-rejection models, all exact in that fixed family;
 - zero finite-model cases in which a retained certificate was below the full-posterior oracle;
-- 18 unit tests, 14 retained named cases, and 17 exact noise-sensitivity points.
+- 33 unit tests, 14 retained named cases, one explicit path-budget witness, and 17 exact noise-sensitivity points.
 
 These are exhaustive only under the inclusion rules implemented in `src/campaigns.py`. They are development-time finite checks, not a sample of deployments, a proof of the general theorems, or an independent replication.
 
 ## Declared model and interpretation
 
-Read `model-language.md` before changing or adding a case. Public affine offsets are absorbed into candidates in the theorem; the JSON language stores zero-offset maps. Observation nodes use independent rational BSC errors. An epoch fixes a response map, Hamming radius and bounded adaptive guess count; it reveals only accept/reject and reaches its continuation only after all guesses fail. A source deficit is charged once to the final event.
+Read `model-language.md` before changing or adding a case. `dimension`, `min_entropy`, and `root` are mandatory. Integer fields must be actual integers (not booleans or floats), and a rational pair must contain two actual integers; the parser never substitutes `k=d` or truncates a float. Public affine offsets are absorbed into candidates in the theorem; the JSON language stores zero-offset maps. Observation nodes use independent rational BSC errors. An epoch fixes a response map, Hamming radius and bounded adaptive guess count; it reveals only accept/reject and reaches its continuation only after all guesses fail. A source deficit is charged once to the final event.
 
 A certificate is an evaluated upper bound associated with explicit assumptions, not a signed attestation or succinct independently checkable proof object. No code path infers entropy, error independence, map correctness, verifier conformance, physical reliability, manufacturing uniqueness or unclonability.
 

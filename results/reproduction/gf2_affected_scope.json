@@ -1,0 +1,217 @@
+{
+  "balanced_boundary_changes": [
+    {
+      "boundary": "1",
+      "csv_line": 5458,
+      "large": "2",
+      "new_balanced": "1/4",
+      "new_holds": "1",
+      "new_unbalanced": "0",
+      "old_balanced": "0",
+      "old_holds": "1",
+      "old_unbalanced": "0",
+      "radius": "0",
+      "small": "0"
+    },
+    {
+      "boundary": "1",
+      "csv_line": 5459,
+      "large": "3",
+      "new_balanced": "1/16",
+      "new_holds": "1",
+      "new_unbalanced": "0",
+      "old_balanced": "0",
+      "old_holds": "1",
+      "old_unbalanced": "0",
+      "radius": "1",
+      "small": "1"
+    },
+    {
+      "boundary": "1",
+      "csv_line": 5460,
+      "large": "4",
+      "new_balanced": "1/64",
+      "new_holds": "1",
+      "new_unbalanced": "0",
+      "old_balanced": "0",
+      "old_holds": "1",
+      "old_unbalanced": "0",
+      "radius": "2",
+      "small": "2"
+    },
+    {
+      "boundary": "1",
+      "csv_line": 5461,
+      "large": "5",
+      "new_balanced": "1/256",
+      "new_holds": "1",
+      "new_unbalanced": "0",
+      "old_balanced": "0",
+      "old_holds": "1",
+      "old_unbalanced": "0",
+      "radius": "3",
+      "small": "3"
+    }
+  ],
+  "corrected_regression": {
+    "all_permutation_canonical_basis": [
+      9,
+      5,
+      3
+    ],
+    "direct_nullspace_basis": [
+      15
+    ],
+    "direct_nullspace_span": [
+      0,
+      15
+    ],
+    "input_rows": [
+      3,
+      6,
+      12
+    ]
+  },
+  "coverage_files": [
+    {
+      "byte_equal_to_supplied_pre_fix_archive": true,
+      "file": "coverage/subspaces.csv"
+    },
+    {
+      "byte_equal_to_supplied_pre_fix_archive": true,
+      "file": "coverage/cosets.csv"
+    }
+  ],
+  "interpretation": "All 96,256 retained protocol rows were regenerated through the corrected GF(2) call chain. Their common certificate/oracle/status numeric fields match the supplied pre-fix archive. This is a bounded comparison for the declared finite families, not a claim about untested models. The only intended retained numeric corrections are the four balanced boundary rows listed here.",
+  "protocol_comparison": [
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/two_epoch.csv",
+      "rows": 4096,
+      "rows_with_any_common_numeric_difference": 0
+    },
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/noisy_adaptive_obs0.csv",
+      "rows": 20480,
+      "rows_with_any_common_numeric_difference": 0
+    },
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/noisy_adaptive_obs1.csv",
+      "rows": 20480,
+      "rows_with_any_common_numeric_difference": 0
+    },
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/noisy_adaptive_obs2.csv",
+      "rows": 20480,
+      "rows_with_any_common_numeric_difference": 0
+    },
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/noisy_adaptive_obs3.csv",
+      "rows": 20480,
+      "rows_with_any_common_numeric_difference": 0
+    },
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/noisy_two_row.csv",
+      "rows": 5120,
+      "rows_with_any_common_numeric_difference": 0
+    },
+    {
+      "compared_fields": [
+        "branch",
+        "full",
+        "flag",
+        "coherent",
+        "coset",
+        "oracle",
+        "sound",
+        "exact",
+        "improves_full",
+        "improves_simple_min",
+        "oracle_states"
+      ],
+      "file": "protocols/post_rejection.csv",
+      "rows": 5120,
+      "rows_with_any_common_numeric_difference": 0
+    }
+  ],
+  "protocol_rows_compared": 96256,
+  "protocol_rows_with_any_common_numeric_difference": 0,
+  "scope": "limited impact recheck after canonical GF(2) Gauss-Jordan correction"
+}

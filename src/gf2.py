@@ -4,39 +4,58 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 
+def _require_int(value: object, name: str) -> int:
+    if isinstance(value, bool) or not isinstance(value, int):
+        raise TypeError(f"{name} must be an integer")
+    return value
+
+
 def mask_limit(d: int) -> int:
+    d = _require_int(d, "dimension")
     if d < 0:
         raise ValueError("dimension must be nonnegative")
     return (1 << d) - 1
 
 
 def canonical_basis(rows: Iterable[int], d: int) -> tuple[int, ...]:
-    """Return a unique reduced basis, ordered by decreasing pivot bit."""
+    """Return the unique reduced row-echelon basis, high pivots first.
+
+    Vectors are represented by ``d``-bit integers.  The implementation performs
+    full Gauss--Jordan elimination, so the result is independent of input row
+    order, duplicate rows, and redundant generators.
+    """
     limit = mask_limit(d)
-    pivots: dict[int, int] = {}
-    for raw in rows:
-        row = int(raw)
+    work: list[int] = []
+    for index, raw in enumerate(rows):
+        row = _require_int(raw, f"row[{index}]")
         if row < 0 or row & ~limit:
             raise ValueError(f"row {row} does not fit dimension {d}")
-        while row:
-            p = row.bit_length() - 1
-            if p in pivots:
-                row ^= pivots[p]
-            else:
-                # Clear this pivot from every existing row, then install it.
-                for q in tuple(pivots):
-                    if (pivots[q] >> p) & 1:
-                        pivots[q] ^= row
-                pivots[p] = row
-                break
-    # Re-reduce from high to low to make the representation canonical.
-    for p in sorted(pivots, reverse=True):
-        row = pivots[p]
-        for q in sorted(pivots):
-            if q < p and ((row >> q) & 1):
-                row ^= pivots[q]
-        pivots[p] = row
-    return tuple(pivots[p] for p in sorted(pivots, reverse=True))
+        if row:
+            work.append(row)
+
+    # Sorting is not needed for mathematical uniqueness, but makes the pivot
+    # search deterministic even before the final RREF is reached.
+    work.sort(reverse=True)
+    pivot_row = 0
+    for pivot in range(d - 1, -1, -1):
+        selected = next(
+            (i for i in range(pivot_row, len(work)) if (work[i] >> pivot) & 1),
+            None,
+        )
+        if selected is None:
+            continue
+        work[pivot_row], work[selected] = work[selected], work[pivot_row]
+        pivot_vector = work[pivot_row]
+        for i in range(len(work)):
+            if i != pivot_row and ((work[i] >> pivot) & 1):
+                work[i] ^= pivot_vector
+        pivot_row += 1
+        if pivot_row == len(work):
+            break
+
+    basis = [row for row in work[:pivot_row] if row]
+    basis.sort(key=lambda row: row.bit_length(), reverse=True)
+    return tuple(basis)
 
 
 def rank(rows: Iterable[int], d: int) -> int:
@@ -48,12 +67,13 @@ def extend_basis(basis: Iterable[int], rows: Iterable[int], d: int) -> tuple[int
 
 
 def reduce_vector(v: int, basis: Iterable[int], d: int) -> int:
+    v = _require_int(v, "vector")
     if v < 0 or v & ~mask_limit(d):
         raise ValueError("vector does not fit dimension")
     out = v
     for row in canonical_basis(basis, d):
-        p = row.bit_length() - 1
-        if (out >> p) & 1:
+        pivot = row.bit_length() - 1
+        if (out >> pivot) & 1:
             out ^= row
     return out
 
@@ -71,30 +91,34 @@ def span_points(basis: Iterable[int], d: int) -> tuple[int, ...]:
 
 
 def nullspace_basis(rows: Iterable[int], d: int) -> tuple[int, ...]:
-    """Basis of {x: row·x=0 for every row}, represented as d-bit masks."""
+    """Basis of ``{x: row*x=0 for every row}``, as ``d``-bit masks."""
     b = canonical_basis(rows, d)
     pivot_to_row = {row.bit_length() - 1: row for row in b}
     pivots = set(pivot_to_row)
     free = [j for j in range(d) if j not in pivots]
     out: list[int] = []
-    for f in free:
-        x = 1 << f
-        # Each reduced row has its pivot plus free-coordinate coefficients.
-        for p, row in pivot_to_row.items():
-            if ((row & x).bit_count() & 1):
-                x |= 1 << p
+    for free_column in free:
+        x = 1 << free_column
+        # In RREF every other pivot column is zero.  Setting a pivot bit to the
+        # parity of the free entries in its row solves that equation directly.
+        for pivot, row in pivot_to_row.items():
+            if (row & x).bit_count() & 1:
+                x |= 1 << pivot
         out.append(x)
     return canonical_basis(out, d)
 
 
 def dot(row: int, x: int) -> int:
+    row = _require_int(row, "row")
+    x = _require_int(x, "vector")
     return (row & x).bit_count() & 1
 
 
 def apply(rows: Iterable[int], x: int) -> int:
+    x = _require_int(x, "vector")
     out = 0
     for j, row in enumerate(rows):
-        out |= dot(int(row), x) << j
+        out |= dot(row, x) << j
     return out
 
 
@@ -106,9 +130,7 @@ def image_basis(rows: Iterable[int], domain_basis: Iterable[int], d: int) -> tup
 
 def image_points(rows: Iterable[int], d: int) -> tuple[int, ...]:
     rows_t = tuple(rows)
-    return span_points(canonical_basis(rows_t, d), d) if False else tuple(
-        sorted({apply(rows_t, x) for x in range(1 << d)})
-    )
+    return tuple(sorted({apply(rows_t, x) for x in range(1 << d)}))
 
 
 def image_points_fast(rows: Iterable[int], d: int) -> tuple[int, ...]:
@@ -151,7 +173,7 @@ def all_subspaces(d: int) -> tuple[tuple[int, ...], ...]:
 
 
 def fiber_partition(shadow: Iterable[int], rows: Iterable[int], d: int) -> tuple[tuple[int, ...], ...]:
-    """Direct signal sets L{x:Sx=s}, one per feasible shadow value."""
+    """Direct signal sets ``L{x:Sx=s}``, one per feasible shadow value."""
     srows = tuple(shadow)
     lrows = tuple(rows)
     groups: dict[int, set[int]] = {}

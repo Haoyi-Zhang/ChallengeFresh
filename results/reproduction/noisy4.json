@@ -1,19 +1,19 @@
 {
   "commands": [
     {
-      "child_system_seconds": 0.105223,
-      "child_user_seconds": 14.113938,
+      "child_system_seconds": 0.067252,
+      "child_user_seconds": 9.695355,
       "command": [
         "/opt/pyvenv/bin/python",
         "src/campaigns.py",
         "additional",
         "--output",
-        "/tmp/freshness-noisy4-mqow0yrb/results"
+        "/tmp/freshness-noisy4-pxqe9o87/results"
       ],
-      "max_rss_kib": 95020,
+      "max_rss_kib": 95788,
       "stderr": "",
-      "stdout": "{\n  \"cpu_seconds\": 12.953977,\n  \"post_rejection_models\": 5120,\n  \"two_epoch_models\": 4096,\n  \"two_row_models\": 5120,\n  \"wall_seconds\": 12.960856\n}\n",
-      "wall_seconds": 13.815516
+      "stdout": "{\n  \"cpu_seconds\": 8.815473,\n  \"post_rejection_models\": 5120,\n  \"two_epoch_domain_metadata\": 1,\n  \"two_epoch_models\": 4096,\n  \"two_row_models\": 5120,\n  \"wall_seconds\": 8.816858\n}\n",
+      "wall_seconds": 9.372173
     }
   ],
   "group": "noisy4",

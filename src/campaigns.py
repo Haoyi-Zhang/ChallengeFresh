@@ -10,14 +10,16 @@ from math import comb
 from pathlib import Path
 import time
 
-from certificate import CertificateEvaluator
+from certificate import CertificateEvaluator, METHODS, evaluate_complete
 from coverage import (ball_volume, code_max_coverage, direct_max_coverage,
                       exact_profile, max_coverage)
-from families import (named_cases, noisy_adaptive, noisy_two_row, post_rejection,
-                      running_example, two_epoch)
+from families import (fair_public_bit_path_budget, named_cases, noisy_adaptive,
+                      noisy_two_row, post_rejection, running_example, two_epoch,
+                      two_row_map)
 from gf2 import (all_subspaces, canonical_basis, cosets, fiber_partition,
                  image_basis, nullspace_basis, span_points)
 from oracle import PosteriorOracle
+from model import Observe
 
 ETAS = (Fraction(0), Fraction(1, 4), Fraction(1, 2), Fraction(3, 4), Fraction(1))
 
@@ -148,11 +150,14 @@ def campaign_coverage(out: Path) -> dict:
                     yield {"radius": t, "small": a, "large": b,
                            "balanced": fstr(fan * fbn), "unbalanced": fstr(fa * fb),
                            "holds": int(fan * fbn >= fa * fb), "boundary": 0}
-        # Four explicit zero-survival boundary cases.
+        # Four boundary transfers: F_t(t)=0, whereas balancing (t,t+2) to
+        # (t+1,t+1) yields [2^{-(t+1)}]^2.
         for t in range(4):
             a, b = t, t + 2
-            yield {"radius": t, "small": a, "large": b, "balanced": "0",
-                   "unbalanced": "0", "holds": 1, "boundary": 1}
+            balanced = Fraction(1, 1 << (2 * (t + 1)))
+            yield {"radius": t, "small": a, "large": b,
+                   "balanced": fstr(balanced), "unbalanced": "0",
+                   "holds": int(balanced >= 0), "boundary": 1}
     summary["balanced_transfer_inequalities"] = write_csv(out / "coverage" / "balanced_transfers.csv",
         ["radius", "small", "large", "balanced", "unbalanced", "holds", "boundary"],
         transfer_rows())
@@ -180,24 +185,37 @@ def campaign_coverage(out: Path) -> dict:
 
 
 def protocol_metrics(protocol) -> dict[str, str | int]:
-    evals = {}
-    for method in ("branch", "full", "flag", "coherent", "coset"):
-        ev = CertificateEvaluator(protocol, method)
-        evals[method] = ev.transferred_risk()
+    complete = evaluate_complete(protocol)
+    values = {method: complete["bounds"][method]["transferred_risk"] for method in METHODS}
+    issued = complete["issued_risk"]
     oracle = PosteriorOracle(protocol)
     exact = oracle.risk()
-    return {**{m: fstr(v) for m, v in evals.items()}, "oracle": fstr(exact),
-            "sound": int(evals["coset"] >= exact), "exact": int(evals["coset"] == exact),
-            "improves_full": int(evals["coset"] < evals["full"]),
-            "improves_simple_min": int(evals["coset"] < min(evals["full"], evals["flag"])),
-            "oracle_states": oracle.states}
+    hierarchy = (values["coset"] <= values["coherent"] <=
+                 min(values["flag"], values["full"]) <= values["branch"])
+    hierarchy_applicable = int(all(complete["bounds"][m]["coverage_mode"] == "exact"
+                                   for m in METHODS))
+    return {
+        **{m: fstr(v) for m, v in values.items()},
+        "issued": fstr(issued),
+        "issued_methods": ";".join(complete["issued_methods"]),
+        "coverage_mode": "exact" if hierarchy_applicable else "fallback",
+        "hierarchy_applicable": hierarchy_applicable,
+        "hierarchy_holds": int(hierarchy),
+        "oracle": fstr(exact),
+        "sound": int(issued >= exact),
+        "exact": int(issued == exact),
+        "improves_full": int(issued < values["full"]),
+        "improves_simple_min": int(issued < min(values["full"], values["flag"])),
+        "oracle_states": oracle.states,
+    }
 
 
 def campaign_adaptive(out: Path, obs_row: int) -> dict:
     path = out / "protocols" / f"noisy_adaptive_obs{obs_row}.csv"
     fields = ["obs_row", "eta", "left_config", "right_config", "branch", "full", "flag",
-              "coherent", "coset", "oracle", "sound", "exact", "improves_full",
-              "improves_simple_min", "oracle_states"]
+              "coherent", "coset", "issued", "issued_methods", "coverage_mode",
+              "hierarchy_applicable", "hierarchy_holds", "oracle", "sound", "exact",
+              "improves_full", "improves_simple_min", "oracle_states"]
     def rows():
         for eta in ETAS:
             for left in range(64):
@@ -210,8 +228,10 @@ def campaign_adaptive(out: Path, obs_row: int) -> dict:
 def campaign_additional(out: Path) -> dict:
     summary: dict[str, int] = {}
     fields_two = ["map1", "radius1", "guesses1", "map2", "radius2", "guesses2",
-                  "branch", "full", "flag", "coherent", "coset", "oracle", "sound", "exact",
-                  "improves_full", "improves_simple_min", "oracle_states"]
+                  "branch", "full", "flag", "coherent", "coset", "issued",
+                  "issued_methods", "coverage_mode", "hierarchy_applicable",
+                  "hierarchy_holds", "oracle", "sound", "exact", "improves_full",
+                  "improves_simple_min", "oracle_states"]
     def two_rows():
         for a1 in range(16):
             for a2 in range(16):
@@ -223,9 +243,25 @@ def campaign_additional(out: Path) -> dict:
                                        "map2": a2, "radius2": t2, "guesses2": q2,
                                        **protocol_metrics(two_epoch(a1, t1, q1, a2, t2, q2))}
     summary["two_epoch_models"] = write_csv(out / "protocols" / "two_epoch.csv", fields_two, two_rows())
+    domain = {
+        "family": "two_epoch",
+        "latent_dimension": 2,
+        "stages": 2,
+        "map_definition": "two_row_map(i)=(i & 3, (i >> 2) & 3)",
+        "maps": [{"index": i, "rows": list(two_row_map(i))} for i in range(16)],
+        "radii": [0, 1],
+        "guess_counts": [1, 2],
+        "expected_models": 4096,
+        "count_formula": "16^2 * 2^4",
+    }
+    domain_path = out / "protocols" / "two_epoch_domain.json"
+    domain_path.write_text(json.dumps(domain, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    summary["two_epoch_domain_metadata"] = 1
 
     fields_n = ["obs_map", "eta", "config", "branch", "full", "flag", "coherent", "coset",
-                "oracle", "sound", "exact", "improves_full", "improves_simple_min", "oracle_states"]
+                "issued", "issued_methods", "coverage_mode", "hierarchy_applicable",
+                "hierarchy_holds", "oracle", "sound", "exact", "improves_full",
+                "improves_simple_min", "oracle_states"]
     def noisy_rows():
         for obs_map in range(16):
             for eta in ETAS:
@@ -235,8 +271,9 @@ def campaign_additional(out: Path) -> dict:
     summary["two_row_models"] = write_csv(out / "protocols" / "noisy_two_row.csv", fields_n, noisy_rows())
 
     fields_p = ["first_row", "obs_row", "eta", "left_config", "right_config", "branch", "full",
-                "flag", "coherent", "coset", "oracle", "sound", "exact", "improves_full",
-                "improves_simple_min", "oracle_states"]
+                "flag", "coherent", "coset", "issued", "issued_methods", "coverage_mode",
+                "hierarchy_applicable", "hierarchy_holds", "oracle", "sound", "exact",
+                "improves_full", "improves_simple_min", "oracle_states"]
     def post_rows():
         for first in range(4):
             for obs in range(4):
@@ -251,12 +288,45 @@ def campaign_additional(out: Path) -> dict:
 
 
 def campaign_cases(out: Path) -> dict:
-    fields = ["case", "branch", "full", "flag", "coherent", "coset", "oracle", "sound", "exact",
-              "improves_full", "improves_simple_min", "oracle_states"]
+    fields = ["case", "branch", "full", "flag", "coherent", "coset", "issued",
+              "issued_methods", "coverage_mode", "hierarchy_applicable", "hierarchy_holds",
+              "oracle", "sound", "exact", "improves_full", "improves_simple_min",
+              "oracle_states"]
     def rows():
         for protocol in named_cases():
             yield {"case": protocol.name, **protocol_metrics(protocol)}
-    return {"named_cases": write_csv(out / "cases" / "named_cases.csv", fields, rows())}
+    named_count = write_csv(out / "cases" / "named_cases.csv", fields, rows())
+    witness = fair_public_bit_path_budget()
+    witness_metrics = protocol_metrics(witness)
+    if not isinstance(witness.root, Observe):
+        raise AssertionError("path-budget witness root must be an observation")
+    conditional_path_risks: list[str] = []
+    conditional_path_issued: list[str] = []
+    for branch_index, child in enumerate(witness.root.children):
+        branch = type(witness)(
+            witness.dimension, witness.min_entropy, child, witness.prior,
+            f"{witness.name}-branch-{branch_index}",
+        )
+        conditional_path_risks.append(fstr(PosteriorOracle(branch).risk()))
+        conditional_path_issued.append(fstr(evaluate_complete(branch)["issued_risk"]))
+    witness_record = {
+        "case": witness.name,
+        "public_choice": "zero-row BSC(1/2), hence a fair public bit independent of X",
+        "conditional_path_risks": conditional_path_risks,
+        "conditional_path_issued": conditional_path_issued,
+        "exact_recursive_risk": witness_metrics["oracle"],
+        "issued_risk": witness_metrics["issued"],
+        "uniform_fixed_stage_bound": fstr(max(Fraction(value) for value in conditional_path_risks)),
+        "pathwise_admission_alpha": fstr(max(Fraction(value) for value in conditional_path_risks)),
+        "interpretation": (
+            "the fixed-stage product and Theorem 2 pathwise admission may use 1/2; "
+            "the complete recurrence averages the fair public branches and returns 3/8"
+        ),
+    }
+    witness_path = out / "cases" / "path_budget_witness.json"
+    witness_path.write_text(json.dumps(witness_record, indent=2, sort_keys=True) + "\n",
+                            encoding="utf-8")
+    return {"named_cases": named_count, "path_budget_witnesses": 1}
 
 
 def campaign_sensitivity(out: Path) -> dict:

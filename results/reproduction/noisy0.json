@@ -1,8 +1,8 @@
 {
   "commands": [
     {
-      "child_system_seconds": 0.13693,
-      "child_user_seconds": 11.532867,
+      "child_system_seconds": 0.088237,
+      "child_user_seconds": 10.149271,
       "command": [
         "/opt/pyvenv/bin/python",
         "src/campaigns.py",
@@ -10,12 +10,12 @@
         "--obs-row",
         "0",
         "--output",
-        "/tmp/freshness-noisy0-xoihtzje/results"
+        "/tmp/freshness-noisy0-glvstdot/results"
       ],
-      "max_rss_kib": 94896,
+      "max_rss_kib": 95280,
       "stderr": "",
-      "stdout": "{\n  \"cpu_seconds\": 10.42329,\n  \"models\": 20480,\n  \"wall_seconds\": 10.42666\n}\n",
-      "wall_seconds": 11.210089
+      "stdout": "{\n  \"cpu_seconds\": 9.270483,\n  \"models\": 20480,\n  \"wall_seconds\": 9.272646\n}\n",
+      "wall_seconds": 9.828274
     }
   ],
   "group": "noisy0",

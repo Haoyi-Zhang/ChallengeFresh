@@ -1,16 +1,16 @@
 {
   "commands": [
     {
-      "child_system_seconds": 0.323005,
-      "child_user_seconds": 1.493247,
+      "child_system_seconds": 0.092278,
+      "child_user_seconds": 4.964947,
       "command": [
         "/opt/pyvenv/bin/python",
         "src/validate_results.py"
       ],
-      "max_rss_kib": 169220,
+      "max_rss_kib": 204764,
       "stderr": "",
-      "stdout": "{\n  \"balanced_transfer_inequalities\": 5460,\n  \"coverage_entries\": 1020,\n  \"direct_center_sets_visited\": 47243,\n  \"direct_equalities\": 105,\n  \"log_concavity_inequalities\": 273,\n  \"named_cases\": 14,\n  \"noise_sweep_points\": 17,\n  \"noisy_conservative\": 198,\n  \"noisy_exact\": 86842,\n  \"noisy_improves_full\": 31428,\n  \"noisy_improves_simple_min\": 14976,\n  \"noisy_models\": 87040,\n  \"oracle_states_noisy\": 845832,\n  \"oracle_states_post_rejection\": 72780,\n  \"oracle_states_two_epoch\": 47750,\n  \"post_rejection_exact\": 5120,\n  \"post_rejection_models\": 5120,\n  \"profile_chunks\": 84,\n  \"profiles_visited\": 33695,\n  \"signal_coset_partitions\": 18265,\n  \"subspace_inequalities\": 7989,\n  \"subspaces\": 465,\n  \"two_epoch_conservative\": 162,\n  \"two_epoch_exact\": 3934,\n  \"two_epoch_max_gap\": \"1/2\",\n  \"two_epoch_models\": 4096,\n  \"violations\": 0,\n  \"weight_vectors_visited\": 11274571\n}\n",
-      "wall_seconds": 1.355369
+      "stdout": "{\n  \"balanced_transfer_inequalities\": 5460,\n  \"coverage_entries\": 1020,\n  \"direct_center_sets_visited\": 47243,\n  \"direct_equalities\": 105,\n  \"log_concavity_inequalities\": 273,\n  \"named_cases\": 14,\n  \"noise_sweep_points\": 17,\n  \"noisy_conservative\": 198,\n  \"noisy_exact\": 86842,\n  \"noisy_improves_full\": 31428,\n  \"noisy_improves_simple_min\": 14976,\n  \"noisy_models\": 87040,\n  \"oracle_states_noisy\": 845832,\n  \"oracle_states_post_rejection\": 72780,\n  \"oracle_states_two_epoch\": 47750,\n  \"path_budget_witnesses\": 1,\n  \"post_rejection_exact\": 5120,\n  \"post_rejection_models\": 5120,\n  \"profile_chunks\": 84,\n  \"profiles_visited\": 33695,\n  \"signal_coset_partitions\": 18265,\n  \"subspace_inequalities\": 7989,\n  \"subspaces\": 465,\n  \"two_epoch_conservative\": 162,\n  \"two_epoch_exact\": 3934,\n  \"two_epoch_max_gap\": \"1/2\",\n  \"two_epoch_models\": 4096,\n  \"violations\": 0,\n  \"weight_vectors_visited\": 11274571\n}\n",
+      "wall_seconds": 4.646563
     }
   ],
   "group": "validate",

@@ -14,6 +14,7 @@
   "oracle_states_noisy": 845832,
   "oracle_states_post_rejection": 72780,
   "oracle_states_two_epoch": 47750,
+  "path_budget_witnesses": 1,
   "post_rejection_exact": 5120,
   "post_rejection_models": 5120,
   "profile_chunks": 84,

@@ -1,6 +1,6 @@
 # Declared model language
 
-A model is a JSON object with `dimension`, `min_entropy`, optional `prior`, and a finite `root` node. Vectors and matrix rows are nonnegative integer bit masks: bit `j` is latent coordinate `j`. The language deliberately omits affine offsets because a public offset can be added to each candidate without changing a Hamming-distance test.
+A model is a JSON object with mandatory `dimension`, mandatory `min_entropy`, optional `prior`, and a mandatory finite `root` node. The parser never substitutes `min_entropy = dimension`. Vectors and matrix rows are nonnegative integer bit masks: bit `j` is latent coordinate `j`. Integer fields must be JSON integers, not booleans, floats, or coercible strings. Exact rationals may be an integer, a rational string such as `"1/4"`, or a two-element array of actual integers; floats and boolean entries are rejected rather than truncated. The language deliberately omits affine offsets because a public offset can be added to each candidate without changing a Hamming-distance test.
 
 Node forms are:
 

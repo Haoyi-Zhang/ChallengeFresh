@@ -84,7 +84,8 @@ def execute_group(group: str) -> dict[str, object]:
             compare_file(out / "protocols" / name, RESULTS / "protocols" / name)
         elif group == "noisy4":
             commands.append(run([sys.executable, "src/campaigns.py", "additional", "--output", str(out)]))
-            for name in ("two_epoch.csv", "noisy_two_row.csv", "post_rejection.csv"):
+            for name in ("two_epoch.csv", "two_epoch_domain.json",
+                         "noisy_two_row.csv", "post_rejection.csv"):
                 compare_file(out / "protocols" / name, RESULTS / "protocols" / name)
         elif group == "sensitivity":
             commands.append(run([sys.executable, "src/campaigns.py", "sensitivity", "--output", str(out)]))

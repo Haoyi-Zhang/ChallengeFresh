@@ -71,6 +71,15 @@ def deterministic_branching() -> Protocol:
                     name="deterministic-branching")
 
 
+
+def fair_public_bit_path_budget() -> Protocol:
+    """Fair public bit selects conditional risks 1/4 and 1/2; total is 3/8."""
+    low = Epoch((1, 2), 0, 1, STOP)   # one exact guess of two fair bits
+    high = Epoch((1,), 0, 1, STOP)     # one exact guess of one fair bit
+    # A zero row through BSC(1/2) is a public fair bit independent of X.
+    return Protocol(2, 2, Observe((0,), Fraction(1, 2), (low, high)),
+                    name="fair-public-bit-path-budget")
+
 def flag_information() -> Protocol:
     # Observe both bits through eta=1/4, then make two exact guesses of the pair.
     child = Epoch((1, 2), 0, 2, STOP)
