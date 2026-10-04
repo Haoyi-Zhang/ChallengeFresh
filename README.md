@@ -72,6 +72,5 @@ The general results have complete written arguments and extensive finite checkin
 
 The full-text calibration now covers twelve TDSC papers, five foundational/influential papers and five adjacent papers. The closest 2025 PUF-AKE work constructs and analyzes computational AKE with reusable robust fuzzy extraction and reports attacks on prior PUF protocols; this repository instead gives conditional information-theoretic bounds for declared finite affine raw-response channels. Neither result is presented as subsuming the other, and no priority claim is made.
 
-Substantive AI assistance was used for research formulation, proof drafting, source analysis, code, finite checks, manuscript text and LaTeX figures. Human authors must verify the mathematics, evidence, citations, authorship and policy declarations before any external use. No submission, publication, public repository upload, contact, account action, acceptance claim or independent review is represented here.
 
 The repository is standalone and does not depend on a parent paper folder, private path, omitted cache or network service. Original software is licensed under `LICENSE`. Scholarly papers are cited rather than redistributed; `external_resources.csv` records acquisition and licensing boundaries.
