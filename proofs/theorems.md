@@ -6,15 +6,17 @@ These are written proofs, not proof-assistant certificates. The executable check
 
 An identity X lies in F_2^d. Initial finite side information Z is arbitrary. The reference law U makes X uniform and independent of Z. A public transcript contains adaptively selected matrices, observation outputs, and guess/rejection events. At an observation, the public matrix L and kernel K_h are chosen using only the public history and independent coins, and the observation has law K_h(o | L X). At an epoch, a fixed matrix A and tolerance t are tested against at most q guesses; only the acceptance bit is returned, and the experiment ends at the first acceptance. There is no other secret-dependent output during an epoch. After all rejections the protocol may select another epoch or an observation. The horizon is finite.
 
-The shadow S at an epoch contains the row spaces of all earlier observation matrices and all response matrices used in completed unsuccessful epochs. It is a proof variable. The actual observer need not know S X. For the noise refinement, only the analytically revealed observation rows are inserted. Its proof history includes the earlier analytical flags as well as the public transcript; the fiber lemma is applied to this enlarged history, not to a marginal history that has forgotten flags. The innovation is r = rank(S; A) - rank(S), where the semicolon stacks rows. Necessarily 0 <= r <= min(d-rank(S),n).
+The shadow S at an epoch entrance contains the row spaces of all earlier observation matrices and all response matrices used in completed unsuccessful epochs. Certificate histories are evaluated at observation or epoch entrances, after all earlier tested response maps have been charged. They do not include partial-retry states as fresh fiber states. S is a proof variable; the actual observer need not know S X. For the noise refinement, only the analytically revealed observation rows are inserted. Its proof history includes the earlier analytical flags as well as the public transcript; the fiber lemma is applied to this enlarged history, not to a marginal history that has forgotten flags. The innovation is r = rank(S; A) - rank(S), where the semicolon stacks rows. Necessarily 0 <= r <= min(d-rank(S),n).
 
 ## 2. Shadow-fiber lemma
 
-**Lemma 1.** Fix Z=z, all independent adversary coins, a live history h of positive probability, and a feasible shadow value S X=s. Under U, X is uniform on the affine fiber {x:Sx=s}.
+**Lemma 1.** Fix Z=z, all independent adversary coins, a positive-probability live history h at an observation or epoch entrance with all prior response maps charged, and a feasible shadow value S X=s. Under U, X is uniform on the affine fiber {x:Sx=s}.
 
 **Proof.** Follow the particular history. Every earlier kernel likelihood K_{h'}(o | Lx) is constant as x varies within the final S-fiber, because every row of that L lies in S. Every earlier rejection indicator is constant on the fiber, because the rows of its response matrix lie in S. A public choice of matrix or guess is fixed after fixing the preceding history and independent coins. Multiplying these constant likelihood factors gives the same likelihood for every x in the fiber. The reference prior assigns every x equal probability. Conditioning therefore preserves uniformity on the fiber. Zero-likelihood fibers are excluded, not divided by. This argument also proves the invariant inductively under adaptive choices. The posterior conditioned only on h is generally a mixture of these uniform fibers, not one uniform affine source. In particular, rejecting one exact guess from a uniform four-element source leaves three points. QED.
 
-The image of an S-fiber under A is an affine code of dimension r: the restricted linear map A:ker S -> F_2^n has rank rank(S;A)-rank(S), and all image points have equal-size preimages. Thus A X is uniform on that affine code when the fiber is fixed.
+During a partial retry epoch, the response map is not yet in S. Rejecting one exact candidate from a uniform four-point identity then leaves three points even conditional on the current shadow. The lemma does not apply there. It applies at node entrances; the whole-epoch union argument below does not invoke it again after each retry.
+
+The image of an S-fiber under A is an affine code of dimension r: the restricted linear map A:ker S -> F_2^n has rank rank(S;A)-rank(S), and all image points have equal-size preimages. Thus A X is uniform on that affine code when the entrance fiber is fixed.
 
 ## 3. Exact multi-ball lifting
 
@@ -38,7 +40,7 @@ For q=1, M is the ball volume B(r,t)=sum_{j=0}^{min(r,t)} binom(r,j). For q=2, a
 
 ## 4. Retry epochs and sequential composition
 
-**Lemma 4 (epoch hazard).** At any live epoch satisfying the game above, under U the conditional probability of an acceptance during that epoch is at most v(r,t,q).
+**Lemma 4 (epoch hazard).** At the entrance of any live epoch satisfying the game above, under U the conditional probability of an acceptance during the whole epoch is at most v(r,t,q).
 
 **Proof.** Fix the history and an S-fiber. Follow the strategy's all-reject branch. This determines at most q candidates. Since success terminates the experiment, the event of any success is precisely the union of the acceptance sets for those candidates; behavior after a success is irrelevant. The image of the fiber is uniform on an affine rank-r code. Apply Lemma 2 and divide by 2^r. The same bound holds on every feasible fiber, so averaging over the conditional fiber distribution preserves it. Finally average independent adversary coins. No independence between attempts, or between successive posteriors, is assumed. QED.
 
@@ -133,7 +135,7 @@ The coherent rule is min_{w in im L} g_S(w). The coset rule is the minimum, over
 
 ### Soundness
 
-Fix a live history h and a feasible value SX=s. The conditional identity is uniform on its affine fiber. Therefore W=LX is uniform on one coset C of D_S. For each I, the continuation inequality is justified conditional on I, the flagged signal W_I, the independent fair output U, and the augmented shadow. It is NOT asserted conditional on the full W. First average these valid inequalities over W_I and U, then over I. Rewriting the resulting finite sums gives E[g_S(W) | h,SX=s], exactly the uniform average on C. This is an algebraic exchange of expectations, not stronger conditioning of the continuation. The minimum coset average bounds it from below, as does the minimum individual signal cost. Average over old shadow values and use finite backward induction. The existing one-time average-min-entropy transfer applies without alteration.
+Fix a live observation-entrance history h and a feasible value SX=s. The conditional identity is uniform on its affine fiber. Therefore W=LX is uniform on one coset C of D_S. For each I, the continuation inequality is justified conditional on I, the flagged signal W_I, the independent fair output U, and the augmented shadow. It is NOT asserted conditional on the full W. First average these valid inequalities over W_I and U, then over I. Rewriting the resulting finite sums gives E[g_S(W) | h,SX=s], exactly the uniform average on C. This is an algebraic exchange of expectations, not stronger conditioning of the continuation. The minimum coset average bounds it from below, as does the minimum individual signal cost. Average over old shadow values and use finite backward induction. The existing one-time average-min-entropy transfer applies without alteration.
 
 ### Domination in the exact-coverage domain
 
