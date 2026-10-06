@@ -33,7 +33,7 @@ python reproduce.py
 python src/validate_results.py
 ```
 
-The runner executes one child at a time, rejects optimized Python, imposes a 3.5 GiB address-space ceiling and 45-second CPU/command ceiling, and stops on any nonzero exit, timeout, or byte difference. Its bounded resumable groups are:
+The runner executes one child at a time, rejects optimized Python, imposes a 3.5 GiB address-space ceiling and 45-second CPU/command ceiling, and stops on any nonzero exit, timeout, or byte difference. To retain generated evidence and stdout/stderr, including failed commands, use fresh external directories with `--work-root /path/to/raw-work --receipt-root /path/to/receipts`. Existing group directories are not overwritten. Its bounded groups are:
 
 ```sh
 python reproduce.py --group quick
@@ -47,7 +47,7 @@ python reproduce.py --group sensitivity
 python reproduce.py --group validate
 ```
 
-Each generation group byte-compares newly generated scientific CSV/JSON evidence with the retained references. Timing receipts are overwritten separately under `results/reproduction/`; the validator recomputes equality, soundness, exactness, improvement, and exact-domain hierarchy indicators from raw numeric fields rather than trusting stored flags or `summary.json`. Tamper tests alter raw values while preserving success flags in isolated copies and require the validator to reject them.
+Each generation group byte-compares newly generated scientific CSV/JSON evidence with the retained references. Timing receipts are written separately under `results/reproduction/` by default, or under `--receipt-root`; the validator regenerates coverage maxima and counting formulas, links direct and affine-code rows to that table, and recomputes equality, soundness, exactness, improvement, and exact-domain hierarchy indicators from raw numeric fields rather than trusting stored flags or `summary.json`. A failed inequality or equality is rejected even when its stored flag truthfully says zero. Tamper tests exercise both preserved and updated flags in isolated copies. The validator does not independently regenerate every code-specific or posterior-oracle computation; the generation groups and their byte comparisons provide that replay.
 
 The fixed evidence includes:
 
@@ -56,7 +56,7 @@ The fixed evidence includes:
 - 87,040 noisy-observation models, of which 86,842 are certificate-exact and 198 conservative; 31,428 improve the probability-preserving full-channel risk and 14,976 improve the minimum of the full-channel and separate-flag risks;
 - 5,120 observation-after-rejection models, all exact in that fixed family;
 - zero finite-model cases in which a retained certificate was below the full-posterior oracle;
-- 33 unit tests, 14 retained named cases, one explicit path-budget witness, and 17 exact noise-sensitivity points.
+- 39 unit tests, 14 retained named cases, one explicit path-budget witness, and 17 exact noise-sensitivity points.
 
 These are exhaustive only under the inclusion rules implemented in `src/campaigns.py`. They are development-time finite checks, not a sample of deployments, a proof of the general theorems, or an independent replication.
 

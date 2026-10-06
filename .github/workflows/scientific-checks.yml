@@ -1,0 +1,46 @@
+name: Scientific checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  finite-reproduction:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      PYTHONUTF8: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+      PYTHONPATH: src
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Reproduce finite evidence and retain failure streams
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p scientific-raw
+          timeout --signal=TERM --kill-after=10s 610s \
+            sudo systemd-run --quiet --wait --pipe --collect \
+              --property=MemoryMax=3758096384 --property=TasksMax=16 \
+              --property=CPUQuota=100% --property=RuntimeMaxSec=600 \
+              --property=KillMode=control-group \
+              --property=WorkingDirectory="$PWD" --property=User="$(id -un)" \
+              --setenv=PYTHONUTF8=1 --setenv=PYTHONDONTWRITEBYTECODE=1 \
+              "$(command -v python)" -B reproduce.py \
+              --work-root scientific-raw/work --receipt-root scientific-raw/receipts \
+            2>&1 | tee scientific-raw/reproduce.log
+      - name: Upload raw generated evidence and command output
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: scientific-raw
+          path: scientific-raw/
+          if-no-files-found: warn
+          retention-days: 14
