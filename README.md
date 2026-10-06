@@ -60,6 +60,8 @@ The fixed evidence includes:
 
 These are exhaustive only under the inclusion rules implemented in `src/campaigns.py`. They are development-time finite checks, not a sample of deployments, a proof of the general theorems, or an independent replication.
 
+The current Linux/Python 3.12 reproduction passes all nine groups and 39 tests. All 16 scientific CSVs and two JSON records match the retained reference bytes. The ten sequential commands use 149.954868 summed child CPU seconds and 150.071469 summed command elapsed seconds, including interpreter startup, tests, and validation. The largest recorded child RSS is 127,964 KiB; it is not aggregate process-tree memory. Current command receipts and raw console output are in `results/measurements/`, separate from the historical timing receipts in `results/reproduction/`.
+
 ## Declared model and interpretation
 
 Read `model-language.md` before changing or adding a case. `dimension`, `min_entropy`, and `root` are mandatory. Integer fields must be actual integers (not booleans or floats), and a rational pair must contain two actual integers; the parser never substitutes `k=d` or truncates a float. Public affine offsets are absorbed into candidates in the theorem; the JSON language stores zero-offset maps. Observation nodes use independent rational BSC errors. An epoch fixes a response map, Hamming radius and bounded adaptive guess count; it reveals only accept/reject and reaches its continuation only after all guesses fail. A source deficit is charged once to the final event.

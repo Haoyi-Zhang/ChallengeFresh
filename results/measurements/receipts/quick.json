@@ -1,0 +1,40 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.134931,
+      "child_user_seconds": 12.030081,
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "max_rss_kib": 94212,
+      "returncode": 0,
+      "stderr": "test_20_running_example (test_core.CertificateOracleTests.test_20_running_example) ... ok\ntest_21_issued_minimum_and_baselines (test_core.CertificateOracleTests.test_21_issued_minimum_and_baselines) ... ok\ntest_22_deterministic_fiber_average (test_core.CertificateOracleTests.test_22_deterministic_fiber_average) ... ok\ntest_23_flag_coupling (test_core.CertificateOracleTests.test_23_flag_coupling) ... ok\ntest_24_flag_information_loss (test_core.CertificateOracleTests.test_24_flag_information_loss) ... ok\ntest_25_noise_complement_relabeling (test_core.CertificateOracleTests.test_25_noise_complement_relabeling) ... ok\ntest_26_entropy_transfer_equality (test_core.CertificateOracleTests.test_26_entropy_transfer_equality) ... ok\ntest_27_fair_public_bit_path_witness (test_core.CertificateOracleTests.test_27_fair_public_bit_path_witness) ... ok\ntest_28_trace_is_deterministic_and_contains_source_steps (test_core.CertificateOracleTests.test_28_trace_is_deterministic_and_contains_source_steps) ... ok\ntest_29_fallback_status_is_explicit (test_core.CertificateOracleTests.test_29_fallback_status_is_explicit) ... ok\ntest_30_source_premises_report_d_k_delta (test_core.CertificateOracleTests.test_30_source_premises_report_d_k_delta) ... ok\ntest_31_cli_root_output_and_diagnostic_method (test_core.CertificateOracleTests.test_31_cli_root_output_and_diagnostic_method) ... ok\ntest_09_one_ball_volume (test_core.CoverageTests.test_09_one_ball_volume) ... ok\ntest_10_two_ball_closed_behavior (test_core.CoverageTests.test_10_two_ball_closed_behavior) ... ok\ntest_11_three_ball_negative_control (test_core.CoverageTests.test_11_three_ball_negative_control) ... ok\ntest_12_profile_matches_direct (test_core.CoverageTests.test_12_profile_matches_direct) ... ok\ntest_01_canonical_basis_equivalence (test_core.LinearAlgebraTests.test_01_canonical_basis_equivalence) ... ok\ntest_02_regression_all_permutations (test_core.LinearAlgebraTests.test_02_regression_all_permutations) ... ok\ntest_03_canonical_basis_idempotent_and_redundancy_invariant (test_core.LinearAlgebraTests.test_03_canonical_basis_idempotent_and_redundancy_invariant) ... ok\ntest_04_direct_nullspace_regression (test_core.LinearAlgebraTests.test_04_direct_nullspace_regression) ... ok\ntest_05_rank_nullity_and_orthogonality_all_small_subspaces (test_core.LinearAlgebraTests.test_05_rank_nullity_and_orthogonality_all_small_subspaces) ... ok\ntest_06_coset_partition (test_core.LinearAlgebraTests.test_06_coset_partition) ... ok\ntest_07_all_subspace_counts (test_core.LinearAlgebraTests.test_07_all_subspace_counts) ... ok\ntest_08_high_bit_ordering (test_core.LinearAlgebraTests.test_08_high_bit_ordering) ... ok\ntest_13_unknown_key_rejected (test_core.ValidationTests.test_13_unknown_key_rejected) ... ok\ntest_14_missing_min_entropy_rejected (test_core.ValidationTests.test_14_missing_min_entropy_rejected) ... ok\ntest_15_bool_and_float_integer_coercions_rejected (test_core.ValidationTests.test_15_bool_and_float_integer_coercions_rejected) ... ok\ntest_16_bad_rational_pair_rejected_without_truncation (test_core.ValidationTests.test_16_bad_rational_pair_rejected_without_truncation) ... ok\ntest_17_bad_child_count_rejected (test_core.ValidationTests.test_17_bad_child_count_rejected) ... ok\ntest_18_prior_cap_rejected (test_core.ValidationTests.test_18_prior_cap_rejected) ... ok\ntest_19_legal_pair_and_string_rationals_preserve_result (test_core.ValidationTests.test_19_legal_pair_and_string_rationals_preserve_result) ... ok\ntest_32_rejects_changed_coverage_value_with_success_flag_preserved (test_validator_tamper.ValidatorTamperTests.test_32_rejects_changed_coverage_value_with_success_flag_preserved) ... ok\ntest_33_rejects_changed_protocol_value_with_flags_preserved (test_validator_tamper.ValidatorTamperTests.test_33_rejects_changed_protocol_value_with_flags_preserved) ... ok\ntest_34_rejects_failed_direct_equality_with_truthful_zero_flag (test_validator_tamper.ValidatorTamperTests.test_34_rejects_failed_direct_equality_with_truthful_zero_flag) ... ok\ntest_35_rejects_failed_lifting_with_truthful_zero_flag (test_validator_tamper.ValidatorTamperTests.test_35_rejects_failed_lifting_with_truthful_zero_flag) ... ok\ntest_36_rejects_failed_log_concavity_with_truthful_zero_flag (test_validator_tamper.ValidatorTamperTests.test_36_rejects_failed_log_concavity_with_truthful_zero_flag) ... ok\ntest_37_rejects_failed_coset_equality_with_truthful_zero_flag (test_validator_tamper.ValidatorTamperTests.test_37_rejects_failed_coset_equality_with_truthful_zero_flag) ... ok\ntest_38_rejects_unchecked_negative_profile_value (test_validator_tamper.ValidatorTamperTests.test_38_rejects_unchecked_negative_profile_value) ... ok\ntest_39_rejects_agreeing_direct_values_disconnected_from_profile (test_validator_tamper.ValidatorTamperTests.test_39_rejects_agreeing_direct_values_disconnected_from_profile) ... ok\n\n----------------------------------------------------------------------\nRan 39 tests in 12.018s\n\nOK\n",
+      "stdout": "",
+      "wall_seconds": 12.189918
+    },
+    {
+      "child_system_seconds": 0.012004,
+      "child_user_seconds": 0.169054,
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python",
+        "src/campaigns.py",
+        "cases",
+        "--output",
+        "scientific-raw/work/quick/results"
+      ],
+      "max_rss_kib": 94212,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"cpu_seconds\": 0.102965,\n  \"named_cases\": 14,\n  \"path_budget_witnesses\": 1,\n  \"wall_seconds\": 0.103006\n}\n",
+      "wall_seconds": 0.181762
+    }
+  ],
+  "group": "quick",
+  "status": "pass"
+}

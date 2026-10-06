@@ -1,0 +1,22 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.010998,
+      "child_user_seconds": 0.24994,
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python",
+        "src/campaigns.py",
+        "sensitivity",
+        "--output",
+        "scientific-raw/work/sensitivity/results"
+      ],
+      "max_rss_kib": 94212,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"coverage_points\": 13,\n  \"cpu_seconds\": 0.159581,\n  \"noise_points\": 17,\n  \"wall_seconds\": 0.160601\n}\n",
+      "wall_seconds": 0.262672
+    }
+  ],
+  "group": "sensitivity",
+  "status": "pass"
+}

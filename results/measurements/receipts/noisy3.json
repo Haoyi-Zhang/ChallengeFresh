@@ -1,0 +1,24 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.022994,
+      "child_user_seconds": 22.204493,
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python",
+        "src/campaigns.py",
+        "adaptive",
+        "--obs-row",
+        "3",
+        "--output",
+        "scientific-raw/work/noisy3/results"
+      ],
+      "max_rss_kib": 94212,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"cpu_seconds\": 22.150036,\n  \"models\": 20480,\n  \"wall_seconds\": 22.154042\n}\n",
+      "wall_seconds": 22.23286
+    }
+  ],
+  "group": "noisy3",
+  "status": "pass"
+}

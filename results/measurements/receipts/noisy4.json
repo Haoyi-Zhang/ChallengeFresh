@@ -1,0 +1,22 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.021996,
+      "child_user_seconds": 18.921487,
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python",
+        "src/campaigns.py",
+        "additional",
+        "--output",
+        "scientific-raw/work/noisy4/results"
+      ],
+      "max_rss_kib": 94212,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"cpu_seconds\": 18.860523,\n  \"post_rejection_models\": 5120,\n  \"two_epoch_domain_metadata\": 1,\n  \"two_epoch_models\": 4096,\n  \"two_row_models\": 5120,\n  \"wall_seconds\": 18.864612\n}\n",
+      "wall_seconds": 18.949871
+    }
+  ],
+  "group": "noisy4",
+  "status": "pass"
+}

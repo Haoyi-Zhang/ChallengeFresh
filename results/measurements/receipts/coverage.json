@@ -1,0 +1,22 @@
+{
+  "commands": [
+    {
+      "child_system_seconds": 0.020993,
+      "child_user_seconds": 12.936865,
+      "command": [
+        "/opt/hostedtoolcache/Python/3.12.14/x64/bin/python",
+        "src/campaigns.py",
+        "coverage",
+        "--output",
+        "scientific-raw/work/coverage/results"
+      ],
+      "max_rss_kib": 94212,
+      "returncode": 0,
+      "stderr": "",
+      "stdout": "{\n  \"balanced_transfer_inequalities\": 5460,\n  \"coverage_entries\": 1020,\n  \"cpu_seconds\": 12.881147,\n  \"direct_center_sets_visited\": 47243,\n  \"direct_equalities\": 105,\n  \"log_concavity_inequalities\": 273,\n  \"profile_chunks\": 84,\n  \"profiles_visited\": 33695,\n  \"signal_coset_partitions\": 18265,\n  \"subspace_inequalities\": 7989,\n  \"subspaces_by_ambient\": {\n    \"0\": 1,\n    \"1\": 2,\n    \"2\": 5,\n    \"3\": 16,\n    \"4\": 67,\n    \"5\": 374\n  },\n  \"subspaces_total\": 465,\n  \"wall_seconds\": 12.888712,\n  \"weight_vectors_visited\": 11274571\n}\n",
+      "wall_seconds": 12.966209
+    }
+  ],
+  "group": "coverage",
+  "status": "pass"
+}
