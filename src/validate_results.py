@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Iterable
 
 from certificate import METHODS
-from coverage import ball_volume, max_coverage
+from coverage import ball_volume, exact_profile, max_coverage
 from certificate import evaluate_complete
 from model import Observe, Protocol
 from oracle import PosteriorOracle
@@ -96,6 +96,13 @@ def validate_coverage(results: Path) -> dict[str, int]:
                 f"{context}: wrong cube size")
         value = integer(row['coverage'], context)
         expected_value, exact = max_coverage(r, t, q)
+        if q == 2:
+            # Profile evidence must still replay exhaustive enumeration, not
+            # silently substitute an algebraic risk query for that evidence.
+            exhaustive_value = exact_profile(r, q)[0][t]
+            require(exact and expected_value == exhaustive_value,
+                    f"{context}: two-ball formula differs from exhaustive profile")
+            expected_value = exhaustive_value
         require(exact and value == expected_value,
                 f"{context}: coverage value differs from regenerated maximum")
         parts = 1 << (q - 1)

@@ -92,6 +92,10 @@ def max_coverage(r: int, t: int, q: int) -> tuple[int, bool]:
         raise ValueError("invalid coverage parameters")
     if t >= r or q >= (1 << r):
         return 1 << r, True
+    # Antipodal centers attain the two-ball volume bound. Keep non-int
+    # direct-call behavior on the existing profile path (e.g. q=2.0).
+    if type(r) is int and type(t) is int and type(q) is int and q == 2:
+        return min(1 << r, 2 * ball_volume(r, t)), True
     if exact_domain(r, q):
         vals, _, _, _ = exact_profile(r, q)
         return vals[t], True
