@@ -56,11 +56,11 @@ The fixed evidence includes:
 - 87,040 noisy-observation models, of which 86,842 are certificate-exact and 198 conservative; 31,428 improve the probability-preserving full-channel risk and 14,976 improve the minimum of the full-channel and separate-flag risks;
 - 5,120 observation-after-rejection models, all exact in that fixed family;
 - zero finite-model cases in which a retained certificate was below the full-posterior oracle;
-- 39 unit tests, 14 retained named cases, one explicit path-budget witness, and 17 exact noise-sensitivity points.
+- 45 unit tests (the original 39 plus six two-query conformance regressions; all 45 passed a separate Windows run), 14 retained named cases, one explicit path-budget witness, and 17 exact noise-sensitivity points.
 
 These are exhaustive only under the inclusion rules implemented in `src/campaigns.py`. They are development-time finite checks, not a sample of deployments, a proof of the general theorems, or an independent replication.
 
-The current Linux/Python 3.12 reproduction passes all nine groups and 39 tests. All 16 scientific CSVs and two JSON records match the retained reference bytes. The ten sequential commands use 149.954868 summed child CPU seconds and 150.071469 summed command elapsed seconds, including interpreter startup, tests, and validation. The largest recorded child RSS is 127,964 KiB; it is not aggregate process-tree memory. Current command receipts and raw console output are in `results/measurements/`, separate from the historical timing receipts in `results/reproduction/`.
+The retained Linux/Python 3.12 reproduction passes all nine groups and 39 tests before the six conformance regressions were added. All 16 scientific CSVs and two JSON records match the retained reference bytes. The ten sequential commands use 149.954868 summed child CPU seconds and 150.071469 summed command elapsed seconds, including interpreter startup, tests, and validation. The largest recorded child RSS is 127,964 KiB; it is not aggregate process-tree memory. Current command receipts and raw console output are in `results/measurements/`, separate from the historical timing receipts in `results/reproduction/`.
 
 ## Declared model and interpretation
 
