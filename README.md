@@ -17,11 +17,18 @@ In the exact local-coverage domain the coset risk is no greater than the coheren
 
 ## Run one declared model
 
-Requirements are Python with `int.bit_count`, the standard library, and a Unix-like system for the bounded campaign runner. No package installation or network access is required. Run commands from this repository root:
+Requirements are Python 3.10+ and the standard library. The CLI and unit tests run on Windows and Unix-like systems; the bounded campaign runner additionally requires Unix resource limits. No package installation or network access is required. Run commands from this repository root:
 
 ```sh
 python src/cli.py cases/noisy-observation.json --oracle
 PYTHONPATH=src python -m unittest discover -s tests -v
+```
+
+For the same unit tests in PowerShell:
+
+```powershell
+$env:PYTHONPATH = 'src'
+python -B -m unittest discover -s tests -v
 ```
 
 The first command reports the required source parameters `d`, `k`, and `delta=d-k`; all five complete method bounds and their exact/fallback status; issued bound `17/32`; full-channel baseline `5/8`; and finite-oracle probability `17/32`. All are exact fractions. `--method` selects a diagnostic view but never replaces the issued minimum over complete sound bounds; `--trace` emits deterministic per-node certificate state, while the JSON root separately records the externally supplied source, map, channel, verifier, and stopping premises. Invalid or unsupported input produces an error and no certificate. The exact oracle has stricter dimensions and retry limits than the certificate; omit `--oracle` for larger declared models.
@@ -30,10 +37,10 @@ The first command reports the required source parameters `d`, `k`, and `delta=d-
 
 ```sh
 python reproduce.py
-python src/validate_results.py
+python src/validate_results.py --no-write-summary
 ```
 
-The runner executes one child at a time, rejects optimized Python, imposes a 3.5 GiB address-space ceiling and 45-second CPU/command ceiling, and stops on any nonzero exit, timeout, or byte difference. To retain generated evidence and stdout/stderr, including failed commands, use fresh external directories with `--work-root /path/to/raw-work --receipt-root /path/to/receipts`. Existing group directories are not overwritten. Its bounded groups are:
+The validator command above checks retained evidence without overwriting `results/summary.json`. The runner executes one child at a time, rejects optimized Python, imposes a 3.5 GiB address-space ceiling and 45-second CPU/command ceiling, and stops on any nonzero exit, timeout, or byte difference. To retain generated evidence and stdout/stderr, including failed commands, use fresh external directories with `--work-root /path/to/raw-work --receipt-root /path/to/receipts`. Existing group directories are not overwritten. Its bounded groups are:
 
 ```sh
 python reproduce.py --group quick
