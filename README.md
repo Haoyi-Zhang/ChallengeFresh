@@ -85,6 +85,11 @@ The full-text calibration now covers twelve TDSC papers, five foundational/influ
 The repository is standalone and does not depend on a parent paper folder, private path, omitted cache or network service. Original software is licensed under `LICENSE`. Scholarly papers are cited rather than redistributed; `external_resources.csv` records acquisition and licensing boundaries.
 ## Vector figure reproduction
 
+The conceptual overview is drawn directly with Python using
+`python scripts/draw_overview.py`. Its figure-only dependencies are in
+`scripts/requirements-schematics.txt`; `--check` compares regenerated vector
+bytes. The paper consumes `figures/overview.pdf` directly.
+
 The retained data can be rendered with `python scripts/plot_figures.py`.
 Native PDFs go to `figures/`; `--paper-figures ../paper/figures` copies identical
 assets into a full project's sibling paper. Figure-only dependencies, font
